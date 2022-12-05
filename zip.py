@@ -1,12 +1,14 @@
 import os.path
 from os.path import basename 
 from zipfile import ZipFile
+from qc import SUBID, SESSIONNUM
 
 # retrieve subid
-subid = input('Enter subject ID (i.e. 00012345): ')
+subid = SUBID
+ses = SESSIONNUM
 
 # init main folders
-subFolder = f'BDV01_CMH_{subid}'
+subFolder = f'BDV01_CMH_{subid}ses-{ses}'
 zipFolder = f'BDV01_CMH_{subid}.zip'
 rootDir = 'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp'
 

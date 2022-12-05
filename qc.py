@@ -1,29 +1,20 @@
 import os
-import pydicom
-from pydicom.data import get_testdata_files
 from pydicom import dcmread
-from zip import subid, subFolder
 
-fpath = get_testdata_files("CT_small.dcm")[0]
-ds = dcmread(fpath)
 
-for dicom in subFolder:
-    print(os.walk)
+SUBID = input('Enter subject ID (i.e. 00012345): ')
+SESSIONNUM = input('Enter Session Number (i.e. 1, 2): ')
+VISITNUM = input('Enter visit number (1) or (2): ')
 
-#SUBID = subid
-#SESSIONNUM = input('Enter Session Number (i.e. 1, 2): ')
-#VISITNUM = input('Enter visit number (1) or (2): ')
+for root, dirs, files in os.walk('C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp/BDV01_CMH_{SUBID}/ses-{SESSIONNUM}'):
+    for dcm in files:
+        fpath = os.path.join(root,dcm)
+        ds = dcmread(fpath, force=True)
+        exp_label = f'BDV01_CMH_{SUBID}_{VISITNUM}_SE0{SESSIONNUM}_MR'
+        ds.PatientName = exp_label
+    print('New experimental label: ', exp_label)
 
-#for dicom_file in 
-
-#print('Original experiment label:', ds.PatientName)
-
-#experiment_label = f'BDV01_CMH_{SUBID}_{VISITNUM}_SE0{SESSIONNUM}_MR'
-#ds.PatientName = experiment_label
-
-#print('New experiment label:', ds.PatientName)
-
-for dicom in subFolder:
+print('DICOM labels corrected')
 
 
 
