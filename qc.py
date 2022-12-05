@@ -2,10 +2,30 @@ import os
 import pydicom
 from pydicom.data import get_testdata_files
 from pydicom import dcmread
+from zip import subid, subFolder
 
-fpath=get_testdata_files('CT_small.dcm')
-
+fpath = get_testdata_files("CT_small.dcm")[0]
 ds = dcmread(fpath)
+
+for dicom in subFolder:
+    print(os.walk)
+
+#SUBID = subid
+#SESSIONNUM = input('Enter Session Number (i.e. 1, 2): ')
+#VISITNUM = input('Enter visit number (1) or (2): ')
+
+#for dicom_file in 
+
+#print('Original experiment label:', ds.PatientName)
+
+#experiment_label = f'BDV01_CMH_{SUBID}_{VISITNUM}_SE0{SESSIONNUM}_MR'
+#ds.PatientName = experiment_label
+
+#print('New experiment label:', ds.PatientName)
+
+for dicom in subFolder:
+
+
 
 
 

@@ -2,20 +2,19 @@
 
 # 1)
 # location of folder where you want to dowload scans
-ROOTDIR='/c/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp'
-cd $ROOTDIR
-pwd
+#ROOTDIR='/c/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp'
+#cd $ROOTDIR
+#pwd
 
-echo 'Enter your USERID: '
-read USERID
+#echo 'Enter your USERID: '
+#read USERID
 
 # 2)
 # connect to TONI server and follow instructions when prompted to enter your password
-sftp -P 14766 $USERID@echo.toni.psych.utoronto.ca
+#sftp -P 14766 $USERID@echo.toni.psych.utoronto.ca
 
 echo 'Enter SUBID: '
 read SUBID
-export SUBID
 
 # 3)
 # download all folders & subfolders of subject
