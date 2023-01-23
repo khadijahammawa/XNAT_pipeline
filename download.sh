@@ -18,6 +18,7 @@ read SUBID
 
 # 4)
 # make folder with appropriate naming convention
+# SUBID will have format of '000#####'
 mkdir $ROOTDIR/BDV01_CMH_$SUBID
 
 # 5)
