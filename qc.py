@@ -5,14 +5,16 @@ from pydicom import dcmread
 SUBID = input('Enter subject ID (i.e. 00012345): ')
 SESSIONNUM = input('Enter Session Number (i.e. 1, 2): ')
 VISITNUM = input('Enter visit number (1) or (2): ')
+SUBFOLDER = f'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp/BDV01_CMH_{SUBID}/ses-{SESSIONNUM}'
 
-for root, dirs, files in os.walk('C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp/BDV01_CMH_{SUBID}/ses-{SESSIONNUM}'):
+for root, dirs, files in os.walk(SUBFOLDER):
     for dcm in files:
         fpath = os.path.join(root,dcm)
         ds = dcmread(fpath, force=True)
+        print('Old experiment label', ds.PatientName)
         exp_label = f'BDV01_CMH_{SUBID}_{VISITNUM}_SE0{SESSIONNUM}_MR'
         ds.PatientName = exp_label
-    print('New experimental label: ', exp_label)
+        print('New experimental label: ', ds.PatientName)
 
 print('DICOM labels corrected')
 

@@ -1,13 +1,18 @@
 #!/bin/bash
 
+cd /c/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp
+
 # 1) first download scans from TONI
-download.sh
+sh ./download.sh
+echo "Participant folder downloaded."
 
 # 2) run quality control (modify exp label)
-qc.py
+python qc.py
+echo "QC is complete."
 
 # 3) zip dicom files for upload to XNAT
-zip.py
+python zip.py
+echo "Participant folder ready for upload."
 
 # 4) upload files to xnat
 # WIP
