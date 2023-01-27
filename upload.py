@@ -1,13 +1,19 @@
 import xnat
-from zip import rootDir
-from zip import zipFolder
-from zip import subFolder
+from zip import tarFolder
 
+TAR_SUBFOLDER=tarFolder
+PROJ='BDV01_CMH'
+DEST='/prearchive'
 # connect to server
-session = xnat.connect('https://xnat.camh.ca', user='khadija_hammawa')
+session = xnat.connect('https://xnat.camh.ca/xnat', user='khadija_hammawa')
 
-# import data onto xnat
-session.services.import_(f'{rootDir}/{zipFolder}', project='BDV01', subject=f'{subFolder}')
+# create subject
+project = session.projects[PROJ]
+print(session.SubjectData())
+#subject = session.classes.SubjectData(parent=project, label='new_subject_label')
+
+# import data to prearchive
+#prearchive_session = session.services.import_(TAR_SUBFOLDER, project=PROJ, destination=DEST)
 
 # close connection to server
 session.disconnect()

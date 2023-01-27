@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-SUBID=00000001
-ROOTDIR='/c/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp'
 # 1) Create the subject folder with the appropriate naming convention
 SUBJECT_FOLDER="$ROOTDIR/BDV01_CMH_$SUBID"
 
