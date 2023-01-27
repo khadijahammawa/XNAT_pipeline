@@ -1,25 +1,24 @@
 import os.path
-from os.path import basename 
-from zipfile import ZipFile
-from qc import SUBID, SESSIONNUM
+from os.path import basename
+from tarfile import TarFile
 
-# retrieve subid
-subid = SUBID
-ses = SESSIONNUM
+#from qc import SESSIONNUM, SUBID
+SUBID= '00000001'
+SESSIONNUM=1
 
-# init main folders
-subFolder = f'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp/BDV01_CMH_{subid}/ses-{ses}'
-zipFolder = f'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp/BDV01_CMH_{subid}.zip'
-rootDir = 'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp'
+# 1) Define main folders
+MAIN_FOLDER = 'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp'
+subFolder = f'{MAIN_FOLDER}/BDV01_CMH_{SUBID}/ses-{SESSIONNUM}'
+tarFolder = f'{MAIN_FOLDER}/BDV01_CMH_{SUBID}.gz'
 
 # create a ZipFile object
-with ZipFile(zipFolder, 'w') as zipObj:
+with TarFile(tarFolder, 'w') as tar:
    # Iterate over all the files in directory
    for folderName, subfolders, filenames in os.walk(subFolder):
     for filename in filenames:
         #create complete filepath of file in directory
         filePath = os.path.join(folderName, filename)
-        # Add file to zip
-        zipObj.write(filePath, basename(filePath))
+        # Add file to tar archive
+        tar.add(filePath, arcname=basename(filePath))
 
-print(f'Subject {subid} zip folder created')
+print(f'Subject {SUBID} zip folder created')
