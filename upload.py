@@ -9,7 +9,7 @@ DEST='/prearchive'
 SUB_LABEL=f'BDV01_CMH_000{SUBID}'
 
 # 2) Connect to server
-session = xnat.connect('https://xnat.camh.ca/xnat', user='khadija_hammawa', password='Kh@l1l12!!!')
+session = xnat.connect('https://xnat.camh.ca/xnat', user='khadija_hammawa')
 
 # 3) Get the project
 project = session.projects[PROJ]
