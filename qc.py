@@ -1,27 +1,27 @@
-import argparse
 import os
-
 from pydicom import dcmread
 
-parser = argparse.ArgumentParser()
-#parser.add_argument("SUBID", help="Subject ID (i.e. 00012345)", type=str)
-#parser.add_argument("SESSIONNUM", help="Session Number (i.e. 1, 2)", type=int)
-#parser.add_argument("VISITNUM", help="Visit Number (1) or (2)", type=int)
-args = parser.parse_args()
+VAR_PATH = 'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp/vars.txt'
+MAIN_FOLDER = 'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp'
 
-SUBID = args.SUBID
-SESSIONNUM = args.SESSIONNUM
-VISITNUM = args.VISITNUM
+with open(VAR_PATH) as f:
+    for line in f:
+        exec(line)
 
-SUBFOLDER = f'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp/BDV01_CMH_{SUBID}/ses-{SESSIONNUM}'
+SUBID = SUBID
+SESSIONNUM = SESSIONNUM
+VISITNUM = VISITNUM
+
+
+SUBFOLDER = f'{MAIN_FOLDER}/BDV01_CMH_000{SUBID}/ses-{SESSIONNUM}'
 
 # 1) Add error handling for variable names
 try:
     SUBID = int(SUBID)
-    if len(str(SUBID)) != 8:
+    if len(str(SUBID)) != 5:
         raise ValueError
 except ValueError:
-    print("Error: Subject ID must be an 8-digit number")
+    print("Error: Subject ID must be an 5-digit number")
     exit()
 
 try:
@@ -34,20 +34,20 @@ except ValueError:
     
 try:
     VISITNUM = int(VISITNUM)
-    if len(str(VISITNUM)) !=1 or VISITNUM !=1 or VISITNUM !=2:
+    if VISITNUM > 2:
         raise ValueError
 except ValueError:
-    print('Error: Session number should be a one-digit number')
+    print('Error: Visit number should be either 1 or 2')
     exit() 
 
-# 2)
+# 2) Change PatientName in the header file for each dicom file
 for root, dirs, files in os.walk(SUBFOLDER):
     for dcm in files:
         fpath = os.path.join(root,dcm)
         ds = dcmread(fpath, force=True)
-        print('Old experiment label', ds.PatientName)
-        exp_label = f'BDV01_CMH_{SUBID}_{VISITNUM}_SE0{SESSIONNUM}_MR'
+        #print('Old experiment label', ds.PatientName)
+        exp_label = f'BDV01_CMH_000{SUBID}_0{VISITNUM}_SE0{SESSIONNUM}_MR'
         ds.PatientName = exp_label
-        print('New experimental label: ', ds.PatientName)
+        #print('New experimental label: ', ds.PatientName)
 
 print('DICOM labels corrected')

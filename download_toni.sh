@@ -7,12 +7,8 @@ if ! cd "$ROOTDIR"; then
 fi
 
 # 2) Get the USERID
-if [ -z "$1" ]; then
-    echo 'Enter your USERID: '
-    read USERID
-else
-    USERID="$1"
-fi
+echo 'Enter your USERID: '
+read USERID
 
 # 3) Connect to the TONI server
 if ! sftp -P 14766 "$USERID@echo.toni.psych.utoronto.ca"; then
