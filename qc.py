@@ -1,19 +1,20 @@
 import os
 from pydicom import dcmread
 
-VAR_PATH = 'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp/vars.txt'
 MAIN_FOLDER = 'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp'
+VAR_PATH = f'{MAIN_FOLDER}/vars.txt'
+
 
 with open(VAR_PATH) as f:
     for line in f:
         exec(line)
 
-SUBID = SUBID
+SUBID = str(SUBID)
 SESSIONNUM = SESSIONNUM
 VISITNUM = VISITNUM
 
-
-SUBFOLDER = f'{MAIN_FOLDER}/BDV01_CMH_000{SUBID}/ses-{SESSIONNUM}'
+SUBFOLDER = f'{MAIN_FOLDER}/BDV01_CMH_000{SUBID}/ses-{VISITNUM}'
+print(SUBFOLDER)
 
 # 1) Add error handling for variable names
 try:
@@ -45,9 +46,9 @@ for root, dirs, files in os.walk(SUBFOLDER):
     for dcm in files:
         fpath = os.path.join(root,dcm)
         ds = dcmread(fpath, force=True)
-        #print('Old experiment label', ds.PatientName)
+        print('Old experiment label', ds.PatientName)
         exp_label = f'BDV01_CMH_000{SUBID}_0{VISITNUM}_SE0{SESSIONNUM}_MR'
         ds.PatientName = exp_label
-        #print('New experimental label: ', ds.PatientName)
+        print('New experimental label: ', ds.PatientName)
 
-print('DICOM labels corrected')
+#print('DICOM labels corrected')
