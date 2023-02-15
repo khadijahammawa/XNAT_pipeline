@@ -9,12 +9,11 @@ with open(VAR_PATH) as f:
     for line in f:
         exec(line)
 
-SUBID = str(SUBID)
+SUBID = SUBID
 SESSIONNUM = SESSIONNUM
 VISITNUM = VISITNUM
 
 SUBFOLDER = f'{MAIN_FOLDER}/BDV01_CMH_000{SUBID}/ses-{VISITNUM}'
-print(SUBFOLDER)
 
 # 1) Add error handling for variable names
 try:
@@ -50,5 +49,6 @@ for root, dirs, files in os.walk(SUBFOLDER):
         exp_label = f'BDV01_CMH_000{SUBID}_0{VISITNUM}_SE0{SESSIONNUM}_MR'
         ds.PatientName = exp_label
         print('New experimental label: ', ds.PatientName)
+        ds.save_as(fpath)
 
-#print('DICOM labels corrected')
+print('DICOM labels corrected.')

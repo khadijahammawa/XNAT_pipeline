@@ -1,12 +1,18 @@
 import xnat
-from zip import tarFolder
+import os
 from qc import SUBID
 
 # 1) Declare constant variables
-TAR_SUBFOLDER=tarFolder
+TAR_SUBFOLDER=f'C:/Users/Khadija_Hammawa/Documents/GitHub/xnat_sftp/BDV01_CMH_000{SUBID}.tar.gz'
 PROJ='BDV01_CMH'
 DEST='/prearchive'
 SUB_LABEL=f'BDV01_CMH_000{SUBID}'
+
+try:
+    if not os.path.exists(TAR_SUBFOLDER):
+        raise FileNotFoundError
+except FileNotFoundError:
+    print("Subject tar.gz folder NOT found")
 
 # 2) Connect to server
 session = xnat.connect('https://xnat.camh.ca/xnat', user='khadija_hammawa')

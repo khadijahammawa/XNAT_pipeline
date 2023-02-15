@@ -27,10 +27,10 @@ echo "=====================EXTRACTION COMPLETE====================="
 
 # 2) TRANSFORM
 echo "===================TRANSFORMATION STARTED===================="
-sh ./transform.sh
+sh ./transform.sh $SUBID
 echo "==========TRANSFORMATION COMPLETE, READY FOR UPLOAD=========="
 
-# 3) LOAD
+# 3) LOAD (WIP)
 echo "==================UPLOAD PROCESS BEGINNING==================="
-sh ./load.sh
+#sh ./load.sh
 echo "======PARTICIPANT $SUBID FOLDER UPLOADED TO PREARCHIVE======="

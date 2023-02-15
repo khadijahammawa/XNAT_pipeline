@@ -19,6 +19,6 @@ DEST_FOLDER=$SUBJECT_FOLDER/ses-$VISITNUM
 cp -r $SOURCE_FOLDER $DEST_FOLDER
 
 # 5) Remove the original subject folder
-rm -r $SOURCE_FOLDER
+#rm -r $SOURCE_FOLDER
 
 echo "Participant $SUBID Scans Copied Sucessfully."
