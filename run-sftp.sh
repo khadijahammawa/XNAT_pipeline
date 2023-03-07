@@ -32,5 +32,5 @@ echo "==========TRANSFORMATION COMPLETE, READY FOR UPLOAD=========="
 
 # 3) LOAD (WIP)
 echo "==================UPLOAD PROCESS BEGINNING==================="
-#sh ./load.sh
+sh ./load.sh
 echo "======PARTICIPANT $SUBID FOLDER UPLOADED TO PREARCHIVE======="
